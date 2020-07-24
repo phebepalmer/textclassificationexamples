@@ -46,7 +46,7 @@ exaggerated_phrases <- function(ds){
   ds <- ds %>%
     mutate(exaggerated_phrases = str_detect(headline,
                                             paste(exaggerated$phrase,
-                                                          collapse = "|")))
+                                                  collapse = "|")))
   return(ds)
 }
 
@@ -224,7 +224,7 @@ pronouns <- function(ds) {
     unnest_tokens(words, headline) %>%
     filter(str_detect(words, paste(pronouns,
                                    collapse = "|")))
-    group_by(ids) %>%
+  group_by(ids) %>%
     summarize(pronouns = n())
   ds <- full_join(ds, tidyds, "ids")
   ds[is.na(ds)] <- 0
