@@ -4,148 +4,115 @@ library(tidytext)
 
 #' Common Phrases
 #'
-#' This function takes in any dataframe with a headline variable and returns a
-#' new dataframe containing the variable common_phrases, which is a boolean
-#' that indicates the presence of one of the phrases found in the
-#' dataframe common.
+#' This function takes in any string and returns a boolean indicating
+#' whether or not one of the phrases within the dataframe common
+#' is present. This function is intended for use on any of the clickbait
+#' MEA datasets.
 #'
-#'
-#' @param ds dataset
+#' @param text string/ headline
 #'
 #' @examples
-#' articles_common <- common_phrases(articles)
+#' articles_common <- headlines %>%
+#'    mutate(has_common_phrase = has_common_phrase(text = title))
 #'
-#' }
 #' @export
-#'
 
-common_phrases <- function(ds){
-  ds <- ds %>%
-    mutate(common_phrases = str_detect(headline,
-                                       paste(common$phrase, collapse = "|")))
-  return(ds)
+has_common_phrase <- function(text) {
+  return(grepl(paste(common$phrase, collapse = "|"), text))
 }
 
 #' Exaggerated Phrases
 #'
-#' This function takes in any dataframe with a headline variable and returns a
-#' new dataframe containing the variable exaggerated_phrases,
-#' which is a boolean that indicates the presence of one of the phrases
-#' found in the dataframe exaggerated.
+#' This function takes in any string and returns a boolean indicating
+#' whether or not one of the phrases within the dataframe exaggerated is
+#' present. This function is intended for use on any of the clickbait
+#' MEA datasets.
 #'
-#'
-#' @param ds dataset
+#' @param text string/ headline
 #'
 #' @examples
-#' articles_exaggerated <- exaggerated_phrases(articles)
+#' articles_exaggerated <- headlines %>%
+#'    mutate(has_exaggerated_phrase =
+#'           has_exaggerated_phrase(text = title))
 #'
-#' }
 #' @export
-#'
-exaggerated_phrases <- function(ds){
-  ds <- ds %>%
-    mutate(exaggerated_phrases = str_detect(headline,
-                                            paste(exaggerated$phrase,
-                                                  collapse = "|")))
-  return(ds)
+
+has_exaggerated_phrase <- function(text) {
+  return(grepl(paste(exaggerated$phrase, collapse = "|"), text))
 }
 
 #' Question Words
 #'
-#' This function takes in any dataframe with a headline variable and returns a
-#' new dataframe containing the variable question_words, which is a boolean
-#' that indicates the presence of one of the phrases found in the questions
-#' dataset.
+#' This function takes in any string and returns a boolean indicating
+#' whether or not one of the phrases within the dataframe question is
+#' present. This function is intended for use on any of the clickbait
+#' MEA datasets.
 #'
-#' @param ds dataset
+#' @param text string/ headline
 #'
 #' @examples
-#' articles_question <- question_words(articles)
+#' articles_question <- headlines %>%
+#'    mutate(has_question_word = has_question_word(text = title))
 #'
-#' }
 #' @export
-question_words <- function(ds){
-  ds <- ds %>%
-    mutate(question_words = str_detect(headline, paste(question$phrase,
-                                                       collapse = "|")))
-  return(ds)
+
+has_question_word <- function(text) {
+  return(grepl(paste(question$word, collapse = "|"), text))
 }
 
 #' Contraction Words
 #'
-#' This function takes in any dataframe with headline and ids variables
-#' and returns a new dataframe containing the variable contraction_words,
-#' which is an integer that enumerates the amount of contractions
-#' (defined in dataset contractions) within a given headline.
+#' This function takes in any string and returns an integer equal to the
+#' number of contractions present.
+#' This function is intended for use on any of the clickbait MEA datasets.
 #'
-#'
-#' @param ds dataset
+#' @param text string/ headline
 #'
 #' @examples
-#' articles_contraction <- contraction_words(articles)
+#' articles_contractions <- headlines %>%
+#'    mutate(num_contractions = num_contractions(text = title))
 #'
-#' }
 #' @export
-contraction_words <- function(ds){
-  tidyds <-  ds %>%
-    unnest_tokens(words, headline) %>%
-    filter(str_detect(words, paste(contractions$phrase,
-                                   collapse = "|"))) %>%
-    group_by(ids) %>%
-    summarize(num_contractions = n())
-  ds <- full_join(ds, tidyds, "ids")
-  ds[is.na(ds)] <- 0
-  return(ds)
+
+num_contractions <- function(text){
+  return(str_count(text, paste(contractions$word, collapse = "|")))
 }
 
 #' Number of Stop Words
 #'
-#' This function takes in any dataframe with  headline and ids variables
-#' and returns a new dataframe containing the variable num_stop_words,
-#' which is an integer enumerating the number of stop words (as defined by
-#' the tidytext package) within a given headline.
+#' This function takes in any string and returns an integer equal to
+#' the number of stop words present.
+#' This function is intended for use on any of the clickbait MEA datasets.
 #'
-#'
-#' @param ds dataset
+#' @param text string/ headline
 #'
 #' @examples
-#' articles_stop_words <- num_stop_words(articles)
+#' articles_stop_words <- headlines %>%
+#'    mutate(num_stop_words = num_stop_words(text = title))
 #'
-#' }
 #' @export
-#'
 
-num_stop_words <- function(ds){
+num_stop_words <- function(text){
   data(stop_words)
-  tidyds <-  ds%>%
-    unnest_tokens(words, headline) %>%
-    filter(str_detect(words, paste(stop_words$word, collapse = "|"))) %>%
-    group_by(ids) %>%
-    summarize(num_stop_words = n())
-  ds <- full_join(ds, tidyds, "ids")
-  ds[is.na(ds)] <- 0
-  return(ds)
+  return(str_count(text, paste(stop_words$word, collapse = "|")))
 }
+
 #' Starts with Number
 #'
-#' This function takes in any dataframe with a headline variable and returns
-#' a new dataframe containing the variable starts_with_num, which is a
-#' boolean that indicates whether or not the headline starts with a number.
+#' This function takes in any string and returns a boolean indicating
+#' whether or not it begins with a number. This function is intended for
+#' use on any of the clickbait MEA datasets.
 #'
-#'
-#' @param ds dataset
+#' @param text string/ headline
 #'
 #' @examples
-#' articles_numstart <- starts_with_num(articles)
+#' articles_starts_num <- headlines %>%
+#'    mutate(starts_with_num = starts_with_num(text = title))
 #'
-#' }
 #' @export
-#'
 
-starts_with_num <- function(ds){
-  ds <- ds %>%
-    mutate(starts_with_num = str_detect(headline, "^[[:digit:]]+"))
-  return(ds)
+starts_with_num <- function(text){
+  return(grepl("^[[:digit:]]+", text))
 }
 #' Positivity (AFINN) Score
 #'
@@ -161,7 +128,6 @@ starts_with_num <- function(ds){
 #' @examples
 #' articles_positivity <- positivity(articles)
 #'
-#' }
 #' @export
 #'
 
@@ -187,7 +153,6 @@ positivity <- function(ds){
 #' @examples
 #' articles_words <- words(articles)
 #'
-#' }
 #' @export
 #'
 words <- function(ds){
@@ -201,32 +166,23 @@ words <- function(ds){
 
 #' Number of Pronouns
 #'
-#' This function takes in any dataframe with headline and ids variables
-#' and returns a new dataframe containing the variable pronouns,
-#' which is an integer that indicates the number of pronouns
-#' within the headline.
+#' This function takes in any string and returns an integer  equal to
+#' the number of pronouns present.
+#' This function is intended for use on any of the clickbait MEA datasets.
 #' Pronouns detected include: I, me, you, he, him, she, her, it, we,
-#' us, they, them, and one.
+#' us, they, them, one, your, and my.
 #'
-#' @param ds dataset
+#' @param text string/ headline
 #'
 #' @examples
-#' articles_pronouns <- pronouns(articles)
+#' articles_pronouns <- headlines %>%
+#'    mutate(num_pronouns = num_pronouns(text = title))
 #'
-#' }
 #' @export
 #'
+num_pronouns <- function(text) {
+  pronouns_list <- c("I", "me", "you", "he" , "him", "she" , "her",
+                "it", "we" , "us", "they" , "them", "one", "your", "my")
 
-pronouns <- function(ds) {
-  pronouns <- c("I", "me", "you", "he" , "him", "she" , "her",
-                "it", "we" , "us", "they" , "them", "one")
-  tidyds <- ds %>%
-    unnest_tokens(words, headline) %>%
-    filter(str_detect(words, paste(pronouns,
-                                   collapse = "|")))
-  group_by(ids) %>%
-    summarize(pronouns = n())
-  ds <- full_join(ds, tidyds, "ids")
-  ds[is.na(ds)] <- 0
-  return(ds)
+  return(str_count(text, paste0(pronouns_list, collapse = "|")))
 }

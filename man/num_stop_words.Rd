@@ -4,14 +4,18 @@
 \alias{num_stop_words}
 \title{Number of Stop Words}
 \usage{
-num_stop_words(ds)
+num_stop_words(text)
 }
 \arguments{
-\item{ds}{dataset}
+\item{text}{string/ headline}
 }
 \description{
-This function takes in any dataframe with  headline and ids variables
-and returns a new dataframe containing the variable num_stop_words,
-which is an integer enumerating the number of stop words (as defined by
-the tidytext package) within a given headline.
+This function takes in any string and returns an integer equal to
+the number of stop words present.
+This function is intended for use on any of the clickbait MEA datasets.
+}
+\examples{
+articles_stop_words <- headlines \%>\%
+   mutate(num_stop_words = num_stop_words(text = title))
+
 }

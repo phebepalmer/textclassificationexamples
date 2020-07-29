@@ -4,13 +4,18 @@
 \alias{starts_with_num}
 \title{Starts with Number}
 \usage{
-starts_with_num(ds)
+starts_with_num(text)
 }
 \arguments{
-\item{ds}{dataset}
+\item{text}{string/ headline}
 }
 \description{
-This function takes in any dataframe with a headline variable and returns
-a new dataframe containing the variable starts_with_num, which is a
-boolean that indicates whether or not the headline starts with a number.
+This function takes in any string and returns a boolean indicating
+whether or not it begins with a number. This function is intended for
+use on any of the clickbait MEA datasets.
+}
+\examples{
+articles_starts_num <- headlines \%>\%
+   mutate(starts_with_num = starts_with_num(text = title))
+
 }

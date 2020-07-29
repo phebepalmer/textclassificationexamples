@@ -16,3 +16,7 @@ which is an integer that represents the total AFINN score associated with
 each headline. Scores of 0 represent neutral headlines, or headlines
 not containing any words within the AFINN wordbank.
 }
+\examples{
+articles_positivity <- positivity(articles)
+
+}

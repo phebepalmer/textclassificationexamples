@@ -14,3 +14,7 @@ This function takes in any dataframe with headline and ids variables
 and returns a new dataframe containing the variable words, which is an
 integer that indicates the number of words within the headline.
 }
+\examples{
+articles_words <- words(articles)
+
+}
