@@ -1,10 +1,20 @@
 library(dplyr) # wrangling data
 library(mosaic) # sampling dataframes
+library(stringr) # str_remove nonASCII char encoding extras
 
 headlines <- read.csv("data-raw/filtered_headlines.csv")
-sample_headlines <- read.csv("data-raw/sample_headlines.csv")
+headlines$title <- iconv(headlines$title,
+                             "latin1", "ASCII//TRANSLIT") %>%
+  str_remove("\"")
 
 set.seed(1999)
+
+sample_headlines <- rbind(mosaic::sample(subset(
+  headlines, clickbait == TRUE), 1000),
+  mosaic::sample(subset(headlines,
+                        clickbait == FALSE), 1000))%>%
+  select(-orig.id)
+
 headlines_train <- mosaic::sample(
   headlines,
   18360

@@ -16,7 +16,7 @@ present. This function is intended for use on any of the clickbait
 MEA datasets.
 }
 \examples{
-articles_question <- headlines \%>\%
+headlines_question <- headlines \%>\%
    mutate(has_question_word = has_question_word(text = title))
 
 }

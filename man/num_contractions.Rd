@@ -10,12 +10,12 @@ num_contractions(text)
 \item{text}{string/ headline}
 }
 \description{
-This function takes in any string and returns an integer equal to the
-number of contractions present.
+This function takes in any string and returns the number of contractions
+present.
 This function is intended for use on any of the clickbait MEA datasets.
 }
 \examples{
-articles_contractions <- headlines \%>\%
+headlines_contractions <- headlines \%>\%
    mutate(num_contractions = num_contractions(text = title))
 
 }

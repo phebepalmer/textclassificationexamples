@@ -4,7 +4,7 @@
 \alias{positivity}
 \title{Positivity (AFINN) Score}
 \usage{
-positivity(ds)
+positivity(text)
 }
 \arguments{
 \item{ds}{dataset}
