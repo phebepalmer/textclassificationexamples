@@ -18,7 +18,7 @@
 
 #' Headlines Train
 #'
-#' This dataset is a random sample of approximately 80% of the observations
+#' This dataset is a random sample of approximately 80\% of the observations
 #' in "headlines".
 #'
 #' @docType data
@@ -33,7 +33,7 @@
 
 #' Headlines Test
 #'
-#' This dataset is a random sample of the remaining 20% of the observations
+#' This dataset is a random sample of the remaining 20\% of the observations
 #' in "headlines" not found in the training set.
 #'
 #' @docType data

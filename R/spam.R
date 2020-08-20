@@ -17,7 +17,7 @@
 "emails"
 #' Email Train
 #'
-#' This dataset is a random sample of 80% of the emails data.
+#' This dataset is a random sample of 80\% of the emails data.
 #'
 #' @docType data
 #' @format A data frame with 5,526 rows and 3 variables:
@@ -30,7 +30,7 @@
 "emails_train"
 #' Email Test
 #'
-#' This dataset is a random sample of 20% of the emails data.
+#' This dataset is a random sample of 20\% of the emails data.
 #'
 #' @docType data
 #' @format A data frame with 1,382 rows and 3 variables:
