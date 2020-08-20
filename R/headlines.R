@@ -6,6 +6,7 @@
 #' containing such language (especially for clickbait == TRUE), this filtering
 #' might not catch all problematic headlines. User discretion is advised.
 #'
+#' @docType data
 #' @format A data frame with 22949 rows and 3 variables:
 #' \describe{
 #'   \item{title}{String}
@@ -20,6 +21,7 @@
 #' This dataset is a random sample of approximately 80% of the observations
 #' in "headlines".
 #'
+#' @docType data
 #' @format A data frame with 18360 rows and 3 variables:
 #' \describe{
 #'   \item{title}{String}
@@ -34,6 +36,7 @@
 #' This dataset is a random sample of the remaining 20% of the observations
 #' in "headlines" not found in the training set.
 #'
+#' @docType data
 #' @format A data frame with 4589 rows and 3 variables:
 #' \describe{
 #'   \item{title}{String}
@@ -52,6 +55,7 @@
 #' headlines through use of 2 X 2 count tables, using this set will allow for
 #' easier interpretation.
 #'
+#' @docType data
 #' @format A data frame with 2000 rows and 3 variables:
 #' \describe{
 #'   \item{title}{String}

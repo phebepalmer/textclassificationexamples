@@ -6,6 +6,7 @@
 #' Given the volume of headlines containing such language 
 #' (especially for spam == TRUE), user discretion is advised.
 #'
+#' @docType data
 #' @format A data frame with 6,908 rows and 3 variables:
 #' \describe{
 #'   \item{subjectline}{String}
@@ -18,6 +19,7 @@
 #'
 #' This dataset is a random sample of 80% of the emails data.
 #'
+#' @docType data
 #' @format A data frame with 5,526 rows and 3 variables:
 #' \describe{
 #'   \item{subjectline}{String}
@@ -30,6 +32,7 @@
 #'
 #' This dataset is a random sample of 20% of the emails data.
 #'
+#' @docType data
 #' @format A data frame with 1,382 rows and 3 variables:
 #' \describe{
 #'   \item{subjectline}{String}

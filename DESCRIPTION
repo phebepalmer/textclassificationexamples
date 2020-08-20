@@ -1,7 +1,7 @@
 Package: textclassificationexamples
 Type: Package
 Title: Example Datasets and Functions for Text Classification MEAs
-Version: 0.4.0
+Version: 0.4.1
 Author: Authors@R: person("Phebe", "Palmer", email = "ppalmer21@amherst.edu", 
   role = a("aut", "cre")), person("Nicholas", "Horton", 
   email = "nhorton@amherst.edu", role = "aut"))
